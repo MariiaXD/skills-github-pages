@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Input+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Input Mono', monospace;
+            background-color: white;
+            color: black;
+            cursor: none; /* Убираем стандартный курсор */
+        }
+
+        header {
+            text-align: center;
+            padding: 1em;
+        }
+
+        .language-switch {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .language-switch button {
+            background: none;
+            border: 1px solid black;
+            padding: 5px 10px;
+            cursor: none;
+            margin: 0 5px;
+            font-family: 'Input Mono', monospace;
+        }
+
+        .language-switch button:hover {
+            background: black;
+            color: white;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0;
+            width: 100%;
+        }
+
+        .category {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+			transition: opacity 0.3s ease; /* Эффект прозрачности при наведении */
+        }
+
+        .category:hover img {
+            opacity: 0.5; /* Прозрачность при наведении */
+        }
+		
+        .category span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-size: 15pt; /* Размер текста */
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category:hover span {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            margin-top: auto;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: black;
+            clip-path: polygon(50% 0, 0 100%, 100% 100%);
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .category:hover, .category:active {
+            cursor: none;
+        }
+
+        button:hover, button:active {
+            cursor: none;
+        }
+    </style>
+    <script>
+        // Движение кастомного курсора
+        document.addEventListener("mousemove", (e) => {
+            const cursor = document.querySelector(".custom-cursor");
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+        });
+
+        // Добавление класса при наведении
+        document.querySelectorAll('.category, .language-switch button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.querySelector(".custom-cursor").classList.add('custom-cursor--hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                document.querySelector(".custom-cursor").classList.remove('custom-cursor--hover');
+            });
+        });
+
+        // Смена языка
+        const translations = {
+            en: { greeting: "Welcome!" },
+            ru: { greeting: "Добро пожаловать!" },
+            de: { greeting: "Willkommen!" },
+        };
+
+        function setLanguage(lang) {
+            document.getElementById("greeting").innerText = translations[lang].greeting;
+        }
+    </script>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <header>
+        <h1>MM</h1>
+        <div class="language-switch">
+            <button onclick="setLanguage('en')">EN</button>
+            <button onclick="setLanguage('ru')">RU</button>
+            <button onclick="setLanguage('de')">DE</button>
+        </div>
+    </header>
+    <main>
+        <a class="category" href="architecture.html">
+            <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Arch_01.jpg" alt="Architecture">
+            <span>Architecture</span>
+        </a>
+        <a class="category" href="design.html">
+            <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Int_01.jpg" alt="Design">
+            <span>Design</span>
+        </a>
+        <a class="category" href="drawing.html">
+            <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Art_01.jpg" alt="Drawing">
+            <span>Drawing</span>
+        </a>
+        <a class="category" href="photography.html">
+            <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Foto_01.jpg" alt="Photography">
+            <span>Photography</span>
+        </a>
+        <a class="category" href="logos.html">
+            <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Logo_01.jpg" alt="Logos">
+            <span>Logo</span>
+        </a>
+        <a class="category" href="story.html">
+            <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/His_01.jpg" alt="Story">
+            <span>Story</span>
+        </a>
+    </main>
+    <footer>
+        <p>&copy; 2024 MM</p>
+    </footer>
+</body>
+</html>
